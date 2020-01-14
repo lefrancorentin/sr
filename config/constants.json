@@ -1,0 +1,7 @@
+{
+    "PORT": 3000,
+    "CANVAS_WIDTH": 1000,
+    "CANVAS_HEIGHT": 600,
+    "PLAYER_SIZE": 20,
+    "PLAYER_SHIFT": 4
+}

@@ -1,0 +1,24 @@
+{
+  "name": "distributedgame",
+  "version": "1.0.0",
+  "description": "a very fun distributed game with flashy stuff and candy",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.istic.univ-rennes1.fr/16004421/distributedgame.git"
+  },
+  "author": "korantun&salomay\u001b[D\u001b[D\u001b[aumay",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
+  }
+}

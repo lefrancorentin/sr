@@ -1,0 +1,49 @@
+Pour expliquer le fonctionnement de socketio (upgrade connection to websocket, ie bidirectionnal connection that stays open, anyone can send message (no req/res))
+https://stackabuse.com/node-js-websocket-examples-with-socket-io/
+
+have first client decide (checkbox) if he wants 2/3/4 players
+/!\ suite de tests [LOOKUP "TEST SOCKET IO", "TEST DISTRIBUTED GAME"]:
+-> nb de joueurs = nb de connexions
+-> 1 partie démarre avec 4 joueurs, nouvelle connexion => nb de joueurs toujours = 4
+-> Somme des scores des joueurs = nombre de sweets
+...
+-> poser la question a taiani
+
+-> "aucune partie n'est en cours, créer une partie?"
+-> "partie en attente de joueur, rejoindre partie?"
+-> "une partie est déjà en cours"
+
+-> setTimeout game loop would have to be on the server ??? 
+    -> maybe not because of checking if arrow is up/down rather than move depending on 
+        -> would send move event periodically to the server while arrow is pressed (need setTimeout) : server is just listening for move events
+!!QUESTION TAIANI: send gamestate every 1000/60 vs every time something happens???
+
+setup VM istic
+
+bug dur à reproduire : quick refresh + move -> le client n'est pas déconnecté parfois (mais il s'en va après ~ 30 sec timeoutno)
+	-> pas besoin de fix, instant co pas possible (la room d'attente buffer la co)
+
+-> gamestate in server : {id1: {x: , y: }, id2: {x: , y: }} (attribute in Board object ?) (js object = dictionnary, pratique car no traitement pour envoi aller retour)
+-> client on connect: send WHOLE gamestate
+    - draw
+-> client on update (attach listener only when whole gamestate has been set at connect)
+    - une seule représentation de player (playerupdate?) est reçue, pas tout le board (pas besoin)
+    - update le board local
+    - draw
+-> client on arrowkeypressed: test validity of the move 
+    (in client ? -> test with client id, send move if it is valid => move event is never sent for nothing) 
+    (in server ? -> if no client validation move can be invalid)
+    -> do both for extra safety?
+-> server on move event (4 != or one unique ?):
+    - validation ?
+    - update gamestate in server
+    - io.emit('update') (emit to all clients) ce JSON: {id: {x: , y: }}
+        -> pas besoin de tout renvoyer
+
+
+
+
+HAVE A CLEAN WORKING APP HERE, THEN SPECIFY EVENTS SERVER/CLIENT & EXPECTED STRUCTURE
+
+- sort out public folder/views : html is served MANUALLY from views folder with an app.get, css/front-js is served from public (also your '/' middleware function is useless, '/' matches public folder since u put no predix & since it's a directory is serves the index : index.html + there's no index.html at root level)
+	nb express static function: see the public folder as "folder that is publicly accessible", as in files in it can be directly accessed from url with correct path to files, as the arborescence is in the server (possible mount prefix before said path)
