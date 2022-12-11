@@ -13,7 +13,7 @@
   "author": "korantun&salomay\u001b[D\u001b[D\u001b[aumay",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "pug": "^2.0.4",
     "socket.io": "^2.3.0"
   },
